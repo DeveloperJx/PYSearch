@@ -20,6 +20,14 @@
          */
         if (nil == searchBundle) { // Empty description resource file in `PYSearch.framework`.
             searchBundle = [NSBundle bundleWithPath:[[NSBundle bundleForClass:[PYSearchViewController class]] pathForResource:@"PYSearch" ofType:@"bundle"]];
+            if (searchBundle == nil) {
+                // 适配SPM
+                NSBundle *classBundle = [NSBundle bundleForClass: [PYSearchViewController class]];
+                NSBundle *spmBundle = [classBundle pathForResource: @"OpenSourceCodeLibrary_SPMOSCL" ofType: @"bundle"];
+                searchBundle = [spmBundle pathForResource: @"PYSearch"
+                                                   ofType: @"bundle"
+                                              inDirectory: @"Resources"];
+            }
         }
     }
     return searchBundle;
