@@ -23,10 +23,11 @@
             if (searchBundle == nil) {
                 // 适配SPM
                 NSBundle *classBundle = [NSBundle bundleForClass: [PYSearchViewController class]];
-                NSBundle *spmBundle = [classBundle pathForResource: @"OpenSourceCodeLibrary_SPMOSCL" ofType: @"bundle"];
-                searchBundle = [spmBundle pathForResource: @"PYSearch"
-                                                   ofType: @"bundle"
-                                              inDirectory: @"Resources"];
+                NSString *spmBundlePath = [classBundle pathForResource: @"OpenSourceCodeLibrary_SPMOSCL" ofType: @"bundle"];
+                NSBundle *spmBundle = [NSBundle bundleWithPath: spmBundlePath];
+                searchBundle = [NSBundle bundleWithPath: [spmBundle pathForResource: @"PYSearch"
+                                                                             ofType: @"bundle"
+                                                                        inDirectory: @"Resources"]];
             }
         }
     }
